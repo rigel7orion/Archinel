@@ -7,6 +7,8 @@ import {
 
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
+import { ScanProvider } from "../components/ScanProvider";
+import AppShell from "../components/AppShell";
 
 // Gothic display typography
 const gothic = UnifrakturCook({
@@ -66,7 +68,9 @@ export default function RootLayout({ children }) {
           storageKey="archinel-theme"
           disableTransitionOnChange={false}
         >
-          {children}
+          <ScanProvider>
+  <AppShell>{children}</AppShell>
+</ScanProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -111,10 +111,13 @@ function CountUp({ value, suffix = "" }) {
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    if (reducedMotion) {
-      setDisplayValue(value);
-      return;
-    }
+   if (reducedMotion) {
+  const frame = requestAnimationFrame(() => {
+    setDisplayValue(value);
+  });
+
+  return () => cancelAnimationFrame(frame);
+}
 
     const duration = 360;
     let animationFrame;

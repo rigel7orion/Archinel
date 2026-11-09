@@ -1,146 +1,74 @@
 
-"use client";
-
-import {
-  ViewTransition,
-  useSyncExternalStore,
-} from "react";
-
-/* =====================================================
-   ARCHINEL — ROUTE TRANSITION MAPPING
-   These names must match globals.css and Sidebar Links.
-   ===================================================== */
-
-// New page animations
-const ENTER_TRANSITIONS = {
-  "to-dashboard": "dashboard-enter",
-  "to-url-scanner": "scanner-enter",
-  "to-scan-history": "history-enter",
-  "to-threat-intelligence": "intelligence-enter",
-  "to-reports": "reports-enter",
-  "to-settings": "settings-enter",
-
-  // Explicit in-app back navigation
-  "history-fade": "history-fade-enter",
-
-  default: "none",
-};
-
-// Previous page animations
-const EXIT_TRANSITIONS = {
-  "from-dashboard": "dashboard-exit",
-  "from-url-scanner": "scanner-exit",
-  "from-scan-history": "history-exit",
-  "from-threat-intelligence": "intelligence-exit",
-  "from-reports": "reports-exit",
-  "from-settings": "settings-exit",
-
-  // Explicit in-app back navigation
-  "history-fade": "history-fade-exit",
-
-  default: "none",
-};
-
-/* =====================================================
-   BROWSER BACK / FORWARD FALLBACK
-   Native popstate skips React ViewTransitions.
-   This small external store triggers a CSS-only fade
-   on the incoming route content.
-   ===================================================== */
-
-const historySubscribers = new Set();
-
-let historyFallbackActive = false;
-let historyListenerAttached = false;
-let historyResetTimer = null;
-
-function notifyHistorySubscribers() {
-  historySubscribers.forEach((callback) => callback());
+function GateOrnament() {
+  return (
+    <svg
+      viewBox="0 0 160 240"
+      className="h-52 w-36 max-w-[70%] opacity-80"
+      fill="none"
+      stroke="#c9aa70"
+      strokeWidth="1.2"
+      aria-hidden="true"
+    >
+      <path d="M80 8 C35 8 20 45 20 90v115h120V90C140 45 125 8 80 8Z" />
+      <path d="M80 23 C45 23 33 52 33 91v102h94V91c0-39-12-68-47-68Z" />
+      <path d="M80 39v153M45 192V98c0-25 10-43 35-43s35 18 35 43v94" />
+      <path d="m80 64 18 27-18 27-18-27z" />
+      <path d="m80 75 9 16-9 16-9-16z" />
+      <circle cx="80" cy="91" r="4" />
+      <path d="M55 145c-12-9-15-22-9-34 9 8 13 17 9 34Z" />
+      <path d="M105 145c12-9 15-22 9-34-9 8-13 17-9 34Z" />
+      <path d="M80 137c-12 13-12 26 0 37 12-11 12-24 0-37Z" />
+      <path d="M32 208h96M44 218h72M61 228h38" />
+      <circle cx="20" cy="28" r="4" />
+      <circle cx="140" cy="28" r="4" />
+      <path d="m20 28-8 8 8 8 8-8zM140 28l-8 8 8 8 8-8z" />
+    </svg>
+  );
 }
-
-function handleHistoryNavigation() {
-  historyFallbackActive = true;
-  notifyHistorySubscribers();
-
-  if (historyResetTimer !== null) {
-    window.clearTimeout(historyResetTimer);
-  }
-
-  historyResetTimer = window.setTimeout(() => {
-    historyFallbackActive = false;
-    historyResetTimer = null;
-
-    notifyHistorySubscribers();
-  }, 150);
-}
-
-function subscribeToHistoryFallback(callback) {
-  historySubscribers.add(callback);
-
-  if (
-    typeof window !== "undefined" &&
-    !historyListenerAttached
-  ) {
-    window.addEventListener(
-      "popstate",
-      handleHistoryNavigation
-    );
-
-    historyListenerAttached = true;
-  }
-
-  return () => {
-    historySubscribers.delete(callback);
-
-    if (
-      typeof window !== "undefined" &&
-      historySubscribers.size === 0 &&
-      historyListenerAttached
-    ) {
-      window.removeEventListener(
-        "popstate",
-        handleHistoryNavigation
-      );
-
-      historyListenerAttached = false;
-    }
-  };
-}
-
-function getHistorySnapshot() {
-  return historyFallbackActive;
-}
-
-function getServerSnapshot() {
-  return false;
-}
-
-/* =====================================================
-   ARCHINEL PAGE TEMPLATE
-   ===================================================== */
 
 export default function Template({ children }) {
-  const isHistoryFallback = useSyncExternalStore(
-    subscribeToHistoryFallback,
-    getHistorySnapshot,
-    getServerSnapshot
-  );
+  const panelStyle = {
+    background:
+      "radial-gradient(ellipse at center, #292033 0%, #17121e 55%, #09080d 100%)",
+    border: "1px solid #b99a62",
+    boxShadow: "inset 0 0 35px #000000aa",
+  };
 
   return (
-    <ViewTransition
-      default="none"
-      enter={ENTER_TRANSITIONS}
-      exit={EXIT_TRANSITIONS}
-    >
+    <div className="relative min-h-screen">
       <div
-        className={
-          isHistoryFallback
-            ? "history-fade-fallback"
-            : undefined
-        }
+        className="archive-gate is-opening"
+        aria-hidden="true"
+        style={{ "--duration-page": "900ms" }}
       >
+        <div
+          className="archive-gate__panel archive-gate__panel--left relative flex items-center justify-center overflow-hidden"
+          style={panelStyle}
+        >
+          <div className="absolute inset-3 border border-[#b99a62]/40" />
+          <div className="absolute inset-5 border border-[#b99a62]/20" />
+          <GateOrnament />
+          <div className="absolute bottom-10 font-gothic text-xs tracking-[0.3em] text-[#c9aa70]">
+            THE ARCHIVE
+          </div>
+        </div>
+
+        <div
+          className="archive-gate__panel archive-gate__panel--right relative flex items-center justify-center overflow-hidden"
+          style={panelStyle}
+        >
+          <div className="absolute inset-3 border border-[#b99a62]/40" />
+          <div className="absolute inset-5 border border-[#b99a62]/20" />
+          <GateOrnament />
+          <div className="absolute bottom-10 font-gothic text-xs tracking-[0.3em] text-[#c9aa70]">
+            EST. 2026
+          </div>
+        </div>
+      </div>
+
+      <div className="relative">
         {children}
       </div>
-    </ViewTransition>
+    </div>
   );
 }

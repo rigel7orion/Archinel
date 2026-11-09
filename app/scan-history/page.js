@@ -1,24 +1,47 @@
 
+"use client";
+
+import { useScan } from "../../components/ScanProvider";
+import RecentScans from "../../components/RecentScans";
+
 export default function ScanHistoryPage() {
+  const { recentScans, visibleScans, searchQuery } = useScan();
+
   return (
-    <main className="page-enter flex min-h-full w-full items-start justify-center p-5 md:p-8">
-      <section className="glass-panel ornate-frame w-full max-w-5xl p-7 md:p-10">
-        <div className="relative z-10 space-y-5">
+    <div className="page-enter mx-auto w-full max-w-[1900px] p-4 sm:p-6 lg:p-8">
+      <div className="mb-7 flex flex-wrap items-center justify-between gap-4">
+        <div>
           <h1 className="font-gothic text-4xl text-[var(--foreground)] md:text-5xl">
             Scan History
           </h1>
 
-          <p className="max-w-2xl text-sm leading-7 text-[var(--muted)]">
-            Review previous website investigations and their recorded risk assessments.
+          <p className="mt-2 text-sm text-[var(--muted)]">
+            Review your previous Cloudflare website investigations.
           </p>
-
-          <div className="mt-8 rounded-lg border border-[var(--border)] bg-[var(--surface-elevated)] p-6">
-            <h2 className="font-gothic text-2xl text-[var(--foreground)]">
-              Coming soon
-            </h2>
-          </div>
         </div>
-      </section>
-    </main>
+
+        <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-elevated)] px-4 py-3">
+          <p className="text-[10px] uppercase tracking-wider text-[var(--muted)]">
+            Saved investigations
+          </p>
+          <p className="mt-1 text-2xl font-semibold text-[var(--foreground)]">
+            {recentScans.length}
+          </p>
+        </div>
+      </div>
+
+      {searchQuery && (
+        <p className="mb-4 text-xs text-[var(--muted)]">
+          Filtered by: {searchQuery}
+        </p>
+      )}
+
+      <RecentScans scans={visibleScans} />
+
+      <p className="mt-4 text-[10px] leading-5 text-[var(--muted)]">
+        Scan history is stored locally in this browser. Clearing browser
+        storage or switching devices may remove or hide these records.
+      </p>
+    </div>
   );
 }

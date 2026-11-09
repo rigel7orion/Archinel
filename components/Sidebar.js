@@ -7,8 +7,8 @@ import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
   { label: "Dashboard", href: "/", icon: "dashboard" },
-  { label: "URL Scanner", href: "/scanner", icon: "scanner" },
-  { label: "Scan History", href: "/history", icon: "history" },
+  { label: "URL Scanner", href: "/url-scanner", icon: "scanner" },
+  { label: "Scan History", href: "/scan-history", icon: "history" },
   {
     label: "Threat Intelligence",
     href: "/threat-intelligence",
@@ -129,11 +129,16 @@ function CastleMark() {
 }
 
 function SidebarContent({ pathname, onNavigate }) {
+    const getRouteKey = (path) =>
+    path === "/" ? "dashboard" : path.slice(1);
+
+  const currentTransitionType = `from-${getRouteKey(pathname)}`;
   return (
     <div className="flex h-full flex-col px-4 py-5">
       {/* Brand */}
       <Link
         href="/"
+          transitionTypes={[currentTransitionType, "to-dashboard"]}
         onClick={onNavigate}
         className="group flex items-center gap-3 rounded-lg px-2 py-2 focus-visible:outline-offset-2"
         aria-label="Archinel home"
@@ -171,6 +176,10 @@ function SidebarContent({ pathname, onNavigate }) {
             <Link
               key={item.href}
               href={item.href}
+                transitionTypes={[
+    currentTransitionType,
+    `to-${getRouteKey(item.href)}`,
+  ]}
               onClick={onNavigate}
               aria-current={active ? "page" : undefined}
               className={`
@@ -242,8 +251,12 @@ export default function Sidebar() {
 
   // Close drawer after navigation.
   useEffect(() => {
+  const frame = requestAnimationFrame(() => {
     setMobileOpen(false);
-  }, [pathname]);
+  });
+
+  return () => cancelAnimationFrame(frame);
+}, [pathname]);
 
   // Support Escape and prevent background scrolling.
   useEffect(() => {
