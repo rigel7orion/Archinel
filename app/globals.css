@@ -1,26 +1,1024 @@
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* =========================================================
+   ARCHINEL — ILLUMINATED GOTHIC ARCHIVE
+   Midnight Indigo / Royal Parchment
+   Tailwind CSS v4
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   01. LIGHT THEME
+   --------------------------------------------------------- */
+
+:root,
+.light {
+  color-scheme: light;
+
+  /* Surfaces */
+  --background: #f3ead8;
+  --surface: #f8f1e1;
+  --surface-elevated: #fff9ed;
+  --surface-glass: rgba(248, 241, 225, 0.84);
+  --surface-highlight: rgba(255, 255, 255, 0.7);
+
+  /* Text */
+  --foreground: #2b2233;
+  --muted: #62576a;
+  --muted-subtle: #766c7d;
+
+  /* Borders and ornaments */
+  --border: #b9a98a;
+  --border-strong: #968364;
+  --ornament: rgba(75, 74, 154, 0.36);
+  --ornament-strong: rgba(75, 74, 154, 0.62);
+
+  /* Royal indigo */
+  --accent: #4b4a9a;
+  --accent-hover: #3c3b83;
+  --accent-foreground: #ffffff;
+  --accent-soft: rgba(75, 74, 154, 0.1);
+  --accent-glow: rgba(75, 74, 154, 0.2);
+
+  /* Antique detailing */
+  --metallic: #947548;
+  --metallic-soft: rgba(148, 117, 72, 0.15);
+
+  /* Severity */
+  --critical: #a51f36;
+  --critical-bg: #f7e0e4;
+  --critical-border: #dba4ae;
+
+  --high: #98420f;
+  --high-bg: #f9e8da;
+  --high-border: #dfb08d;
+
+  --medium: #795400;
+  --medium-bg: #f8edcb;
+  --medium-border: #d9c17e;
+
+  --low: #176451;
+  --low-bg: #dceee6;
+  --low-border: #a5cabb;
+
+  --focus-ring: #4b4a9a;
+
+  /* Static depth: never animated */
+  --shadow-panel:
+    0 10px 28px rgba(55, 43, 55, 0.07),
+    inset 0 1px 0 var(--surface-highlight);
+
+  --shadow-raised:
+    0 18px 40px rgba(55, 43, 55, 0.12),
+    inset 0 1px 0 var(--surface-highlight);
+
+  /* Fonts: supplied by next/font in layout.js */
+  --font-gothic: "UnifrakturCook", serif;
+  --font-interface: "Inter", Arial, sans-serif;
+  --font-technical: "IBM Plex Mono", monospace;
 }
+
+/* ---------------------------------------------------------
+   02. DARK THEME
+   --------------------------------------------------------- */
+
+.dark {
+  color-scheme: dark;
+
+  --background: #0b0a14;
+  --surface: #14121f;
+  --surface-elevated: #1b1829;
+  --surface-glass: rgba(20, 18, 31, 0.86);
+  --surface-highlight: rgba(255, 255, 255, 0.055);
+
+  --foreground: #e8e4f0;
+  --muted: #c0b8cf;
+  --muted-subtle: #a69db9;
+
+  --border: #3a3350;
+  --border-strong: #655777;
+  --ornament: rgba(181, 157, 211, 0.35);
+  --ornament-strong: rgba(181, 157, 211, 0.6);
+
+  --accent: #9b8be8;
+  --accent-hover: #afa2f2;
+  --accent-foreground: #171326;
+  --accent-soft: rgba(155, 139, 232, 0.13);
+  --accent-glow: rgba(155, 139, 232, 0.23);
+
+  --metallic: #c6a978;
+  --metallic-soft: rgba(198, 169, 120, 0.15);
+
+  /* Severity */
+  --critical: #ff8798;
+  --critical-bg: #451923;
+  --critical-border: #873747;
+
+  --high: #ffad78;
+  --high-bg: #462719;
+  --high-border: #855333;
+
+  --medium: #f4ce75;
+  --medium-bg: #443817;
+  --medium-border: #78632b;
+
+  --low: #83d6bd;
+  --low-bg: #153c34;
+  --low-border: #347968;
+
+  --focus-ring: #b2a4ff;
+
+  --shadow-panel:
+    0 10px 28px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 var(--surface-highlight);
+
+  --shadow-raised:
+    0 18px 40px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 var(--surface-highlight);
+}
+
+/* Follow system preference before next-themes hydrates. */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    color-scheme: dark;
+
+    --background: #0b0a14;
+    --surface: #14121f;
+    --surface-elevated: #1b1829;
+    --surface-glass: rgba(20, 18, 31, 0.86);
+    --surface-highlight: rgba(255, 255, 255, 0.055);
+
+    --foreground: #e8e4f0;
+    --muted: #c0b8cf;
+    --muted-subtle: #a69db9;
+
+    --border: #3a3350;
+    --border-strong: #655777;
+    --ornament: rgba(181, 157, 211, 0.35);
+    --ornament-strong: rgba(181, 157, 211, 0.6);
+
+    --accent: #9b8be8;
+    --accent-hover: #afa2f2;
+    --accent-foreground: #171326;
+    --accent-soft: rgba(155, 139, 232, 0.13);
+    --accent-glow: rgba(155, 139, 232, 0.23);
+
+    --metallic: #c6a978;
+    --metallic-soft: rgba(198, 169, 120, 0.15);
+
+    --critical: #ff8798;
+    --critical-bg: #451923;
+    --critical-border: #873747;
+
+    --high: #ffad78;
+    --high-bg: #462719;
+    --high-border: #855333;
+
+    --medium: #f4ce75;
+    --medium-bg: #443817;
+    --medium-border: #78632b;
+
+    --low: #83d6bd;
+    --low-bg: #153c34;
+    --low-border: #347968;
+
+    --focus-ring: #b2a4ff;
+
+    --shadow-panel:
+      0 10px 28px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 var(--surface-highlight);
+
+    --shadow-raised:
+      0 18px 40px rgba(0, 0, 0, 0.38),
+      inset 0 1px 0 var(--surface-highlight);
+  }
+}
+
+/* ---------------------------------------------------------
+   03. TAILWIND V4 THEME MAPPING
+   --------------------------------------------------------- */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --font-sans: var(--font-interface);
+  --font-mono: var(--font-technical);
+  --font-display: var(--font-gothic);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ---------------------------------------------------------
+   04. MOTION TOKENS
+   One shared timing and easing system
+   --------------------------------------------------------- */
+
+:root {
+  --duration-click: 140ms;
+  --duration-fast: 180ms;
+  --duration-page: 360ms;
+  --duration-scanner: 340ms;
+  --duration-history: 360ms;
+  --duration-raven: 360ms;
+  --duration-scroll: 380ms;
+  --duration-settings: 320ms;
+  --duration-fade: 300ms;
+
+  --ease-archive: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-gate: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --distance-page: 24px;
+  --distance-small: 18px;
+  --distance-content: 12px;
+
+  /* Capped so table entrances remain short. */
+  --stagger-step: 12ms;
+  --stagger-maximum: 72ms;
+}
+
+/* ---------------------------------------------------------
+   05. GLOBAL BASE
+   --------------------------------------------------------- */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--background);
+  scroll-behavior: smooth;
 }
 
 body {
+  min-height: 100vh;
+  margin: 0;
+
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family: var(--font-interface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+code,
+pre,
+.font-technical,
+.url-text {
+  font-family: var(--font-technical);
+  font-variant-numeric: tabular-nums;
+}
+
+.font-gothic,
+.font-display {
+  font-family: var(--font-gothic);
+  font-weight: 700;
+}
+
+.count-value {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* ---------------------------------------------------------
+   06. AMBIENT ARCHIVE BACKGROUND
+   Static gradients. No animated blur or filter.
+   --------------------------------------------------------- */
+
+.app-atmosphere {
+  position: relative;
+  isolation: isolate;
+}
+
+.app-atmosphere::before,
+.app-atmosphere::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+
+  width: 460px;
+  height: 460px;
+  border-radius: 50%;
+}
+
+.app-atmosphere::before {
+  top: -240px;
+  right: -170px;
+
+  background: radial-gradient(
+    circle,
+    var(--accent-glow),
+    transparent 70%
+  );
+
+  opacity: 0.5;
+}
+
+.app-atmosphere::after {
+  bottom: -250px;
+  left: -180px;
+
+  background: radial-gradient(
+    circle,
+    var(--ornament),
+    transparent 70%
+  );
+
+  opacity: 0.32;
+}
+
+/* ---------------------------------------------------------
+   07. GLASS PANELS
+   Blur is static; never animate backdrop-filter.
+   --------------------------------------------------------- */
+
+.glass-panel {
+  position: relative;
+  isolation: isolate;
+
+  background: var(--surface-glass);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  box-shadow: var(--shadow-panel);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-panel-raised {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-raised);
+}
+
+/* ---------------------------------------------------------
+   08. ILLUMINATED GOTHIC FRAMES
+   --------------------------------------------------------- */
+
+.ornate-frame {
+  position: relative;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+}
+
+.ornate-frame::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+
+  inset: 4px;
+  border: 1px solid var(--ornament);
+  border-radius: 7px;
+}
+
+.ornate-corner {
+  position: relative;
+}
+
+.ornate-corner::after {
+  content: "✦";
+  position: absolute;
+  top: 7px;
+  left: 9px;
+
+  color: var(--metallic);
+  font-size: 11px;
+  opacity: 0.8;
+
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------
+   09. BUTTONS — WAX SEAL FEEDBACK
+   --------------------------------------------------------- */
+
+.wax-press {
+  position: relative;
+  isolation: isolate;
+
+  transition:
+    transform var(--duration-click) var(--ease-archive),
+    opacity var(--duration-click) var(--ease-standard);
+}
+
+.wax-press:active {
+  transform: scale(0.975);
+  opacity: 0.9;
+}
+
+/* Pre-rendered torch glow. Only opacity changes. */
+.torch-glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.torch-glow::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+
+  inset: -3px;
+  border-radius: inherit;
+
+  background: radial-gradient(
+    ellipse,
+    var(--accent-glow),
+    transparent 72%
+  );
+
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.torch-glow:hover::after,
+.torch-glow:focus-visible::after {
+  opacity: 1;
+}
+
+/* Wax-seal burst, anchored to its containing button. */
+.scan-seal-burst {
+  position: relative;
+  isolation: isolate;
+}
+
+.scan-seal-burst::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+
+  left: 50%;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+
+  border: 2px solid var(--metallic);
+  border-radius: 50%;
+
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.15);
+}
+
+.scan-seal-burst.is-bursting::after {
+  animation: wax-seal-expand var(--duration-scanner) var(--ease-archive)
+    both;
+}
+
+@keyframes wax-seal-expand {
+  0% {
+    opacity: 0.85;
+    transform: translate(-50%, -50%) scale(0.15);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(5);
+  }
+}
+
+/* ---------------------------------------------------------
+   10. NAVIGATION — OPACITY-BASED ILLUMINATION
+   --------------------------------------------------------- */
+
+.nav-interactive {
+  position: relative;
+  isolation: isolate;
+
+  transition:
+    transform var(--duration-click) var(--ease-archive),
+    opacity var(--duration-fast) var(--ease-standard);
+}
+
+.nav-interactive::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+
+  inset: 0;
+  border-radius: inherit;
+
+  background: var(--accent-soft);
+  border: 1px solid var(--ornament);
+
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.nav-interactive::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+
+  inset: -4px;
+  border-radius: inherit;
+
+  background: radial-gradient(
+    ellipse,
+    var(--accent-glow),
+    transparent 72%
+  );
+
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.nav-interactive:hover::before,
+.nav-interactive[aria-current="page"]::before {
+  opacity: 1;
+}
+
+.nav-interactive:hover::after,
+.nav-interactive:focus-visible::after {
+  opacity: 1;
+}
+
+.nav-interactive:active {
+  transform: scale(0.985);
+}
+
+/* ---------------------------------------------------------
+   11. CARDS — SUBTLE LIFT
+   --------------------------------------------------------- */
+
+.panel-lift {
+  transition: transform var(--duration-fast) var(--ease-archive);
+}
+
+.panel-lift:hover {
+  transform: translateY(-3px);
+}
+
+/* ---------------------------------------------------------
+   12. STAGGERED CONTENT ENTRANCE
+   --------------------------------------------------------- */
+
+@keyframes archive-stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(9px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-in {
+  opacity: 0;
+
+  animation: archive-stagger-in var(--duration-page) var(--ease-archive)
+    forwards;
+
+  animation-delay: calc(
+    min(var(--stagger-index, 0), 6) * var(--stagger-step)
+  );
+}
+
+/* ---------------------------------------------------------
+   13. VIEW TRANSITION CLASSES
+   React ViewTransition applies these classes to snapshots.
+   No global root transition animation is used.
+   --------------------------------------------------------- */
+
+/* Dashboard: The Archive Opens
+   Actual gate panels are provided by the route template.
+*/
+
+@keyframes dashboard-content-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dashboard-content-exit {
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+::view-transition-new(.dashboard-enter) {
+  animation: dashboard-content-enter var(--duration-page) var(--ease-archive)
+    both;
+}
+
+::view-transition-old(.dashboard-exit) {
+  animation: dashboard-content-exit var(--duration-page) var(--ease-archive)
+    both;
+}
+
+/* URL Scanner: The Seal Is Pressed */
+
+@keyframes scanner-content-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scanner-content-exit {
+  to {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+}
+
+::view-transition-new(.scanner-enter) {
+  animation: scanner-content-enter var(--duration-scanner)
+    var(--ease-archive) both;
+}
+
+::view-transition-old(.scanner-exit) {
+  animation: scanner-content-exit var(--duration-scanner)
+    var(--ease-archive) both;
+}
+
+/* Scan History: The Ledger Page */
+
+@keyframes ledger-enter {
+  from {
+    opacity: 0;
+    transform: translateX(var(--distance-page));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes ledger-exit {
+  to {
+    opacity: 0;
+    transform: translateX(calc(var(--distance-page) * -1));
+  }
+}
+
+::view-transition-new(.history-enter) {
+  animation: ledger-enter var(--duration-history) var(--ease-archive)
+    both;
+}
+
+::view-transition-old(.history-exit) {
+  animation: ledger-exit var(--duration-history) var(--ease-archive)
+    both;
+}
+
+/* Threat Intelligence: The Raven Flight */
+
+@keyframes raven-enter {
+  from {
+    opacity: 0;
+    transform: translate(24px, -18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes raven-exit {
+  to {
+    opacity: 0;
+    transform: translate(-12px, 8px);
+  }
+}
+
+::view-transition-new(.intelligence-enter) {
+  animation: raven-enter var(--duration-raven) var(--ease-archive) both;
+}
+
+::view-transition-old(.intelligence-exit) {
+  animation: raven-exit var(--duration-raven) var(--ease-archive) both;
+}
+
+/* Reports: The Scroll Unfurls
+   Uses transform instead of clip-path or changing dimensions.
+*/
+
+@keyframes scroll-enter {
+  from {
+    opacity: 0;
+    transform: scaleY(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes scroll-exit {
+  to {
+    opacity: 0;
+    transform: scaleY(0.985);
+  }
+}
+
+::view-transition-new(.reports-enter) {
+  animation: scroll-enter var(--duration-scroll) var(--ease-archive)
+    both;
+}
+
+::view-transition-old(.reports-exit) {
+  animation: scroll-exit var(--duration-scroll) var(--ease-archive)
+    both;
+}
+
+/* Settings: The Workshop Door */
+
+@keyframes workshop-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--distance-small));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes workshop-exit {
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+::view-transition-new(.settings-enter) {
+  animation: workshop-enter var(--duration-settings) var(--ease-archive)
+    both;
+}
+
+::view-transition-old(.settings-exit) {
+  animation: workshop-exit var(--duration-settings) var(--ease-archive)
+    both;
+}
+
+/* ---------------------------------------------------------
+   14. DASHBOARD GATE PANELS
+   Two flat panels move apart from the centre.
+   Template will render these elements.
+   --------------------------------------------------------- */
+
+.archive-gate {
+  position: absolute;
+  z-index: 50;
+  inset: 0;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.archive-gate__panel {
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--ornament);
+}
+
+.archive-gate__panel--left {
+  transform-origin: right center;
+}
+
+.archive-gate__panel--right {
+  transform-origin: left center;
+}
+
+.archive-gate.is-opening .archive-gate__panel--left {
+  animation: archive-gate-left var(--duration-page) var(--ease-gate)
+    forwards;
+}
+
+.archive-gate.is-opening .archive-gate__panel--right {
+  animation: archive-gate-right var(--duration-page) var(--ease-gate)
+    forwards;
+}
+
+@keyframes archive-gate-left {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes archive-gate-right {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* ---------------------------------------------------------
+   15. BROWSER BACK/FORWARD FALLBACK
+   Simple fade. No directional movement.
+   --------------------------------------------------------- */
+
+@keyframes quiet-history-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.history-fade-fallback {
+  animation: quiet-history-fade 120ms linear both;
+}
+
+::view-transition-new(.history-fade-enter) {
+  animation: quiet-history-fade var(--duration-fade) linear both;
+}
+
+::view-transition-old(.history-fade-exit) {
+  animation: quiet-history-fade var(--duration-fade) linear reverse both;
+}
+
+/* ---------------------------------------------------------
+   16. RESULT CARD — SCROLL UNFURL
+   --------------------------------------------------------- */
+
+@keyframes result-unfurl {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scaleY(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+.scroll-unfurl {
+  transform-origin: top center;
+
+  animation: result-unfurl var(--duration-scroll) var(--ease-archive)
+    both;
+}
+
+/* ---------------------------------------------------------
+   17. THEME ICON ROTATION
+   --------------------------------------------------------- */
+
+.theme-icon {
+  transition:
+    transform var(--duration-page) var(--ease-archive),
+    opacity var(--duration-page) var(--ease-standard);
+}
+
+.theme-icon.is-active {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.theme-icon.is-inactive {
+  opacity: 0;
+  transform: rotate(-65deg) scale(0.72);
+}
+
+/* ---------------------------------------------------------
+   18. SEVERITY BADGES
+   --------------------------------------------------------- */
+
+.severity-critical {
+  color: var(--critical);
+  background: var(--critical-bg);
+  border: 1px solid var(--critical-border);
+}
+
+.severity-high {
+  color: var(--high);
+  background: var(--high-bg);
+  border: 1px solid var(--high-border);
+}
+
+.severity-medium {
+  color: var(--medium);
+  background: var(--medium-bg);
+  border: 1px solid var(--medium-border);
+}
+
+.severity-low {
+  color: var(--low);
+  background: var(--low-bg);
+  border: 1px solid var(--low-border);
+}
+
+/* ---------------------------------------------------------
+   19. ACCESSIBILITY
+   --------------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+::selection {
+  color: var(--accent-foreground);
+  background: var(--accent);
+}
+
+/* ---------------------------------------------------------
+   20. REDUCED MOTION
+   Everything becomes a short fade.
+   --------------------------------------------------------- */
+
+@keyframes archive-reduced-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+
+    animation-name: archive-reduced-fade !important;
+    animation-duration: 120ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+
+    transition-property: opacity !important;
+    transition-duration: 120ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .panel-lift:hover,
+  .wax-press:active,
+  .nav-interactive:active {
+    transform: none !important;
+  }
+
+  .archive-gate {
+    display: none;
+  }
+
+  ::view-transition-new(.dashboard-enter),
+  ::view-transition-old(.dashboard-exit),
+  ::view-transition-new(.scanner-enter),
+  ::view-transition-old(.scanner-exit),
+  ::view-transition-new(.history-enter),
+  ::view-transition-old(.history-exit),
+  ::view-transition-new(.intelligence-enter),
+  ::view-transition-old(.intelligence-exit),
+  ::view-transition-new(.reports-enter),
+  ::view-transition-old(.reports-exit),
+  ::view-transition-new(.settings-enter),
+  ::view-transition-old(.settings-exit),
+  ::view-transition-new(.history-fade-enter),
+  ::view-transition-old(.history-fade-exit) {
+    animation: archive-reduced-fade 120ms linear both !important;
+  }
 }
